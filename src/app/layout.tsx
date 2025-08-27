@@ -3,19 +3,21 @@ import { Roboto } from "next/font/google";
 import "./globals.css";
 import ThemeProviderWrapper from "@/components/ThemeProvider";
 import { BookingProvider } from "@/context/BookingContext";
+import { AuthProvider } from "@/context/AuthContext";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Box } from "@mui/material";
 
 const roboto = Roboto({
-  weight: ['300', '400', '500', '700'],
+  weight: ["300", "400", "500", "700"],
   subsets: ["latin"],
-  display: 'swap',
+  display: "swap",
 });
 
 export const metadata: Metadata = {
   title: "CineBook - Online Movie Ticket Booking",
-  description: "Book your favorite movies online with CineBook. Easy, fast, and convenient movie ticket booking system.",
+  description:
+    "Book your favorite movies online with CineBook. Easy, fast, and convenient movie ticket booking system.",
 };
 
 export default function RootLayout({
@@ -27,21 +29,23 @@ export default function RootLayout({
     <html lang="en">
       <body className={roboto.className}>
         <ThemeProviderWrapper>
-          <BookingProvider>
-            <Box
-              sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                minHeight: '100vh',
-              }}
-            >
-              <Header />
-              <Box component="main" sx={{ flexGrow: 1 }}>
-                {children}
+          <AuthProvider>
+            <BookingProvider>
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  minHeight: "100vh",
+                }}
+              >
+                <Header />
+                <Box component="main" sx={{ flexGrow: 1 }}>
+                  {children}
+                </Box>
+                <Footer />
               </Box>
-              <Footer />
-            </Box>
-          </BookingProvider>
+            </BookingProvider>
+          </AuthProvider>
         </ThemeProviderWrapper>
       </body>
     </html>
